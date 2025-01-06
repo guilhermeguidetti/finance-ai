@@ -7,7 +7,12 @@ const Home = () => {
   if (!userId) {
     redirect("/login");
   }
-  return <UserButton showName />;
+  return (
+    <div className="flex h-full items-center justify-center">
+      <h1>Home</h1>
+      <UserButton showName />
+    </div>
+  );
 };
 
 export default Home;
