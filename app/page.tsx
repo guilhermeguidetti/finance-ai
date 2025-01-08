@@ -1,4 +1,3 @@
-import { UserButton } from "@clerk/nextjs";
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import Navbar from "./_components/navbar";
@@ -11,9 +10,8 @@ const Home = () => {
   return (
     <>
       <Navbar />
-      <div className="flex h-full items-center justify-center">
+      <div className="flex items-center justify-center">
         <h1>Home</h1>
-        <UserButton showName />
       </div>
     </>
   );
