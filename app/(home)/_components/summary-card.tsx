@@ -27,7 +27,7 @@ const SummaryCard = ({
       </CardHeader>
       <CardContent className="flex justify-between">
         <p
-          className={`text-${size === "small" ? "text-2xl font-bold" : "text-4xl"} font-bold`}
+          className={`${size === "small" ? "text-2xl font-bold" : "text-4xl"} font-bold`}
         >
           {Intl.NumberFormat("pt-BR", {
             style: "currency",
