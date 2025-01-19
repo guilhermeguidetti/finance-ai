@@ -27,7 +27,6 @@ const Home = async ({ searchParams: { month } }: HomeProps) => {
   }
 
   const dashboard = await getDashboard(month);
-  console.log(dashboard);
 
   return (
     <>
