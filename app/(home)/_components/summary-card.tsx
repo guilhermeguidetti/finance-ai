@@ -10,7 +10,7 @@ interface SummaryCardProps {
   userCanAddTransaction?: boolean;
 }
 
-const SummaryCard = async ({
+const SummaryCard = ({
   icon,
   title,
   amount,
@@ -18,18 +18,18 @@ const SummaryCard = async ({
   userCanAddTransaction,
 }: SummaryCardProps) => {
   return (
-    <Card className={`${size === "large" ? "bg-white bg-opacity-5" : ""}`}>
+    <Card>
       <CardHeader className="flex-row items-center gap-4">
         {icon}
         <p
-          className={` ${size === "small" ? "text-muted-foreground" : "text-white opacity-70"}`}
+          className={`${size === "small" ? "text-muted-foreground" : "text-white opacity-70"}`}
         >
           {title}
         </p>
       </CardHeader>
       <CardContent className="flex justify-between">
         <p
-          className={`${size === "small" ? "text-2xl font-bold" : "text-4xl"} font-bold`}
+          className={`font-bold ${size === "small" ? "text-2xl" : "text-4xl"}`}
         >
           {Intl.NumberFormat("pt-BR", {
             style: "currency",

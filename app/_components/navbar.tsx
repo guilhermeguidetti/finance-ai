@@ -7,11 +7,11 @@ import { usePathname } from "next/navigation";
 
 const Navbar = () => {
   const pathname = usePathname();
-
   return (
     <nav className="flex justify-between border-b border-solid px-8 py-4">
+      {/* ESQUERDA */}
       <div className="flex items-center gap-10">
-        <Image src="/logo.svg" alt="logo" width={178} height={39} />
+        <Image src="/logo.svg" width={173} height={39} alt="Finance AI" />
         <Link
           href="/"
           className={
@@ -43,6 +43,7 @@ const Navbar = () => {
           Assinatura
         </Link>
       </div>
+      {/* DIREITA */}
       <UserButton showName />
     </nav>
   );

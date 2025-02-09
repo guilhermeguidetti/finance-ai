@@ -1,11 +1,15 @@
 "use client";
+
 import { ArrowDownUpIcon } from "lucide-react";
 import { Button } from "./ui/button";
-
 import { useState } from "react";
 import UpsertTransactionDialog from "./upsert-transaction-dialog";
-import { Tooltip, TooltipProvider, TooltipTrigger } from "./ui/tooltip";
-import { TooltipContent } from "@radix-ui/react-tooltip";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "./ui/tooltip";
 
 interface AddTransactionButtonProps {
   userCanAddTransaction?: boolean;
@@ -22,21 +26,20 @@ const AddTransactionButton = ({
         <Tooltip>
           <TooltipTrigger asChild>
             <Button
-              disabled={!userCanAddTransaction}
-              className="rounded-full"
+              className="rounded-full font-bold"
               onClick={() => setDialogIsOpen(true)}
+              disabled={!userCanAddTransaction}
             >
-              Adicionar transação <ArrowDownUpIcon />
+              Adicionar transação
+              <ArrowDownUpIcon />
             </Button>
           </TooltipTrigger>
-          <TooltipContent side="top" align="center">
-            {!userCanAddTransaction
-              ? "Você atingiu o limite de transações para o mês"
-              : "Adicione uma nova transação"}
+          <TooltipContent>
+            {!userCanAddTransaction &&
+              "Você atingiu o limite de transações. Atualize seu plano para criar transações ilimitadas."}
           </TooltipContent>
         </Tooltip>
       </TooltipProvider>
-
       <UpsertTransactionDialog
         isOpen={dialogIsOpen}
         setIsOpen={setDialogIsOpen}

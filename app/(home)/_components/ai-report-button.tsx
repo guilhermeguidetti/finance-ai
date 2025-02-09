@@ -12,8 +12,8 @@ import {
   DialogTrigger,
 } from "@/app/_components/ui/dialog";
 import { BotIcon, Loader2Icon } from "lucide-react";
-import React, { useState } from "react";
 import { generateAiReport } from "../_actions/generate-ai-report";
+import { useState } from "react";
 import { ScrollArea } from "@/app/_components/ui/scroll-area";
 import Markdown from "react-markdown";
 import Link from "next/link";
@@ -23,31 +23,32 @@ interface AiReportButtonProps {
   month: string;
 }
 
-export default function AiReportButton({
-  month,
-  hasPremiumPlan,
-}: AiReportButtonProps) {
+const AiReportButton = ({ month, hasPremiumPlan }: AiReportButtonProps) => {
   const [report, setReport] = useState<string | null>(null);
   const [reportIsLoading, setReportIsLoading] = useState(false);
   const handleGenerateReportClick = async () => {
-    // API call to generate AI report
-    console.log("Generating AI report...");
     try {
       setReportIsLoading(true);
       const aiReport = await generateAiReport({ month });
+      console.log({ aiReport });
       setReport(aiReport);
     } catch (error) {
-      console.error("Failed to generate AI report", error);
+      console.error(error);
     } finally {
       setReportIsLoading(false);
     }
   };
-
   return (
-    <Dialog>
+    <Dialog
+      onOpenChange={(open) => {
+        if (!open) {
+          setReport(null);
+        }
+      }}
+    >
       <DialogTrigger asChild>
         <Button variant="ghost">
-          Relatório de IA
+          Relatório IA
           <BotIcon />
         </Button>
       </DialogTrigger>
@@ -55,9 +56,9 @@ export default function AiReportButton({
         {hasPremiumPlan ? (
           <>
             <DialogHeader>
-              <DialogTitle>Relatório de IA</DialogTitle>
+              <DialogTitle>Relatório IA</DialogTitle>
               <DialogDescription>
-                Use inteligência artificial para gerar relatórios com insights
+                Use inteligência artificial para gerar um relatório com insights
                 sobre suas finanças.
               </DialogDescription>
             </DialogHeader>
@@ -72,8 +73,8 @@ export default function AiReportButton({
                 onClick={handleGenerateReportClick}
                 disabled={reportIsLoading}
               >
-                Gerar relatório
                 {reportIsLoading && <Loader2Icon className="animate-spin" />}
+                Gerar relatório
               </Button>
             </DialogFooter>
           </>
@@ -82,15 +83,15 @@ export default function AiReportButton({
             <DialogHeader>
               <DialogTitle>Relatório IA</DialogTitle>
               <DialogDescription>
-                Você precisa de um plano premium para gerar relatórios de IA.
+                Você precisa de um plano premium para gerar relatórios com IA.
               </DialogDescription>
             </DialogHeader>
             <DialogFooter>
               <DialogClose asChild>
                 <Button variant="ghost">Cancelar</Button>
               </DialogClose>
-              <Button variant="outline" asChild>
-                <Link href="/subscription">Adquirir plano</Link>
+              <Button asChild>
+                <Link href="/subscription">Assinar plano premium</Link>
               </Button>
             </DialogFooter>
           </>
@@ -98,4 +99,6 @@ export default function AiReportButton({
       </DialogContent>
     </Dialog>
   );
-}
+};
+
+export default AiReportButton;
